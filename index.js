@@ -155,16 +155,24 @@ function ShoppingCart() {
         },
 
         checkout() {
-            if (this.paymentAmount >= this.totalCost) {
+            if (this.paymentAmount == this.totalCost) {
                 this.message = "Enjoy your pizzas!";
                 this.emptyCart = { smallpricePizza: 0, medipricePizza: 0, largepricePizza: 0 };
                 this.ZeroItemsOncart = { smallPizza: 'R0', mediumPizza: 'R0', largePizza: 'R0' };
                 this.isCheckingOut = false;
-            } else {
+            }
+            else if (this.paymentAmount >= this.totalCost) {
+                const change = this.paymentAmount - this.totalCost;
+                this.message = "You have some change" + " R" + change.toFixed(2) + "<br><br>Enjoy your pizzas!";
+                this.emptyCart = { smallpricePizza: 0, medipricePizza: 0, largepricePizza: 0 };
+                this.ZeroItemsOncart = { smallPizza: 'R0', mediumPizza: 'R0', largePizza: 'R0' };
+                this.isCheckingOut = false;   
+            }
+            else {
                 this.message = "Sorry - that is not enough money!";
             }
             this.paymentAmount = null;
-            setTimeout(() => this.message = '', 3000);
+            setTimeout(() => this.message = '', 6000);
         }
     };
 }
